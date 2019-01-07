@@ -42,5 +42,8 @@
 	"bugs": {
 		"url": "https://github.com/verlok/lazyload/issues"
 	},
-	"homepage": "http://verlok.github.io/lazyload"
+	"homepage": "http://verlok.github.io/lazyload",
+	"resolutions": {
+		"natives": "1.1.3"
+	}
 }

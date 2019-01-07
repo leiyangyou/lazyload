@@ -162,6 +162,7 @@ LazyLoad.prototype = {
 		this._elements = null;
 		this._queryOriginNode = null;
 		this._settings = null;
+		this._destroyed = true;
 	},
 
 	load: function(element, force) {

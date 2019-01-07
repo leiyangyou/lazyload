@@ -281,16 +281,18 @@ define(function () {
 	};
 
 	var eventHandler = function eventHandler(event, success, instance) {
-		var settings = instance._settings;
-		var className = success ? settings.class_loaded : settings.class_error;
-		var callback = success ? settings.callback_load : settings.callback_error;
-		var element = event.target;
+		if (!instance._destroyed) {
+			var settings = instance._settings;
+			var className = success ? settings.class_loaded : settings.class_error;
+			var callback = success ? settings.callback_load : settings.callback_error;
+			var element = event.target;
 
-		removeClass(element, settings.class_loading);
-		addClass(element, className);
-		callbackIfSet(callback, element);
+			removeClass(element, settings.class_loading);
+			addClass(element, className);
+			callbackIfSet(callback, element);
 
-		instance._updateLoadingCount(-1);
+			instance._updateLoadingCount(-1);
+		}
 	};
 
 	var addOneShotEventListeners = function addOneShotEventListeners(element, instance) {
@@ -460,6 +462,7 @@ define(function () {
 			this._elements = null;
 			this._queryOriginNode = null;
 			this._settings = null;
+			this._destroyed = true;
 		},
 
 		load: function load(element, force) {

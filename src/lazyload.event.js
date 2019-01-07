@@ -26,16 +26,18 @@ const removeAllEventListeners = (element, loadHandler, errorHandler) => {
 };
 
 const eventHandler = function(event, success, instance) {
-	var settings = instance._settings;
-	const className = success ? settings.class_loaded : settings.class_error;
-	const callback = success ? settings.callback_load : settings.callback_error;
-	const element = event.target;
-
-	removeClass(element, settings.class_loading);
-	addClass(element, className);
-	callbackIfSet(callback, element);
-
-	instance._updateLoadingCount(-1);
+	if (!instance._destroyed) {
+    var settings = instance._settings;
+    const className = success ? settings.class_loaded : settings.class_error;
+    const callback = success ? settings.callback_load : settings.callback_error;
+    const element = event.target;
+    
+    removeClass(element, settings.class_loading);
+    addClass(element, className);
+    callbackIfSet(callback, element);
+    
+    instance._updateLoadingCount(-1);
+	}
 };
 
 export const addOneShotEventListeners = (element, instance) => {
